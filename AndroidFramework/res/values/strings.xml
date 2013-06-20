@@ -4,5 +4,16 @@
     <string name="app_name">AndroidFramework</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_base">BaseActivity</string>
+    
+    <!-- Luancher Acitivity -->
+	<string name="set_fragment">Set Fragment</string>    
 
+	<!-- Fragment_1 -->
+	<string name="text_fragment1">Fragment 1</string>
+	<string name="next">Next</string>
+	<string name="back">Back</string>
+	
+		<!-- Fragment_2 -->
+	<string name="text_fragment2">Fragment 2</string>
 </resources>

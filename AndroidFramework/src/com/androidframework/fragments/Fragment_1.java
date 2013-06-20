@@ -1,9 +1,7 @@
 package com.androidframework.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,10 +10,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.androidframework.R;
+import com.androidframework.activity.SubActivity1;
 
 public class Fragment_1 extends BaseFragment implements OnClickListener {
 	LinearLayout contentLayout = null;
-	Button next = null;
+	Button nextFragment = null;
+	Button nextActivity = null;
+	Button toggleActionBar = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,19 +26,27 @@ public class Fragment_1 extends BaseFragment implements OnClickListener {
 				R.layout.layout_fragment_1, container, false);
 		doInitializeViews();
 		setListeners();
+		if(!getActivity().getActionBar().isShowing()){
+			getActivity().getActionBar().show();
+		}
 		return contentLayout;
 	}
+
 
 	@Override
 	public void doInitializeViews() {
 		// TODO Auto-generated method stub
-		next = (Button) contentLayout.findViewById(R.id.nextFragment);
+		nextFragment = (Button) contentLayout.findViewById(R.id.nextFragment);
+		nextActivity = (Button) contentLayout.findViewById(R.id.nextActivity);
+		toggleActionBar = (Button) contentLayout.findViewById(R.id.toggleActionBar);
 	}
 
 	@Override
 	public void setListeners() {
 		// TODO Auto-generated method stub
-		next.setOnClickListener(this);
+		nextFragment.setOnClickListener(this);
+		nextActivity.setOnClickListener(this);
+		toggleActionBar.setOnClickListener(this);
 	}
 
 	@Override
@@ -60,9 +69,17 @@ public class Fragment_1 extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void doDisableView() {
-		if (next != null) {
-			next.setOnClickListener(null);
-			next = null;
+		if (nextFragment != null) {
+			nextFragment.setOnClickListener(null);
+			nextFragment = null;
+		}
+		if (nextActivity != null) {
+			nextActivity.setOnClickListener(null);
+			nextActivity = null;
+		}
+		if (toggleActionBar != null) {
+			toggleActionBar.setOnClickListener(null);
+			toggleActionBar = null;
 		}
 	}
 
@@ -73,10 +90,32 @@ public class Fragment_1 extends BaseFragment implements OnClickListener {
 			case R.id.nextFragment:
 				setFragment();
 				break;
+			case R.id.nextActivity:
+				setActivity();
+				break;
+			case R.id.toggleActionBar:
+				toggleActionBar();
+				break;
 
 			default:
 				break;
 			}
+		}
+	}
+
+	private void setActivity() {
+		// TODO Auto-generated method stub
+		startActivity(new Intent(getActivity(), SubActivity1.class));
+		getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.fade_out_slow);
+	}
+
+	private void toggleActionBar() {
+		// TODO Auto-generated method stub
+		boolean isVisible = getActivity().getActionBar().isShowing();
+		if(isVisible){
+			getActivity().getActionBar().hide();
+		}else{
+			getActivity().getActionBar().show();
 		}
 	}
 

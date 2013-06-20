@@ -3,12 +3,14 @@ package com.androidframework.fragments;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -26,11 +28,13 @@ import com.androidframework.R;
 import com.androidframework.adapters.DisplayImageCursorAdapter;
 import com.androidframework.database.DatabaseHelper;
 
+
 public class Fragment_2 extends BaseFragment
 		implements
 			OnClickListener,
 			LoaderCallbacks<Cursor>,
 			OnScrollListener {
+
 
 	LinearLayout contentLayout = null;
 	Button back = null;
@@ -56,6 +60,7 @@ public class Fragment_2 extends BaseFragment
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		//getActivity().getActionBar().hide();
 		doInitializeViews();
 		setListeners();
 		setAdapters();
@@ -79,6 +84,7 @@ public class Fragment_2 extends BaseFragment
 		imageList.setAdapter(mAdapter);
 		// adapter.setFooterView(footerView);
 		imageList.removeFooterView(footerView);
+		
 
 	}
 

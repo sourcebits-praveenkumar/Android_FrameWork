@@ -4,16 +4,21 @@
     <string name="app_name">AndroidFramework</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+      <string name="sub_activity1">Sub Activity 1</string>
     <string name="title_activity_base">BaseActivity</string>
-    
-    <!-- Luancher Acitivity -->
-	<string name="set_fragment">Set Fragment</string>    
 
-	<!-- Fragment_1 -->
-	<string name="text_fragment1">Fragment 1</string>
-	<string name="next">Next</string>
-	<string name="back">Back</string>
-	
-		<!-- Fragment_2 -->
-	<string name="text_fragment2">Fragment 2</string>
+    <!-- Luancher Acitivity -->
+    <string name="set_fragment">Set Fragment</string>
+       <string name="next_activity">Next Activity</string>
+
+    <!-- Fragment_1 -->
+    <string name="text_fragment1">Fragment 1</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="toggle_action_bar">Toggle Action Bar</string>
+
+    <!-- Fragment_2 -->
+    <string name="text_fragment2">Fragment 2</string>
+    <string name="title_activity_sub_activity1">SubActivity1</string>
+
 </resources>

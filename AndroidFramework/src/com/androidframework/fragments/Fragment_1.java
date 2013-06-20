@@ -1,6 +1,7 @@
 package com.androidframework.fragments;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -80,16 +81,11 @@ public class Fragment_1 extends BaseFragment implements OnClickListener {
 	}
 
 	private void setFragment() {
-		FragmentManager fragmentManager = getActivity()
-				.getSupportFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager
-				.beginTransaction();
-
-		Fragment_2 fragment1 = new Fragment_2();
-		fragmentTransaction.replace(R.id.launcher_container1, fragment1);
-		fragmentTransaction.addToBackStack(null);
-		fragmentTransaction.commitAllowingStateLoss();
+		int anim[]  = {R.anim.slide_in_right,R.anim.slide_out_left,R.anim.slide_in_left,R.anim.slide_out_right};
+		setFragment(new Fragment_2(),true,true,R.id.launcher_container1,null, anim,-1);
 	}
+	
+	
 
 	@Override
 	public void onDestroyView() {

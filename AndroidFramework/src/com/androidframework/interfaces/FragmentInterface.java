@@ -1,5 +1,7 @@
 package com.androidframework.interfaces;
 
+import android.support.v4.app.Fragment;
+
 public interface FragmentInterface {
 
 	void doInitializeViews(); // initialize the view of the fragment.
@@ -14,4 +16,6 @@ public interface FragmentInterface {
 
 	void doDisableView();// Disable or clear the views of the fragment. Opposite
 							// of doInitializeViews().
+	
+	//void setFragment(Fragment toFragment,Boolean doReplace,Boolean doAddToBackStack,int containerId,String trasnsactionTag);
 }

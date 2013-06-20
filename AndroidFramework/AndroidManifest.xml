@@ -7,6 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
+    
+      <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -28,6 +30,11 @@
             android:name="com.androidframework.activity.BaseActivity"
             android:label="@string/title_activity_base" >
         </activity>
+        
+           <provider android:name="com.androidframework.database.DatabaseContentProvider"
+                  android:authorities="com.androidframework.database.ImageUrls"
+                  android:enabled="true" />
+        
     </application>
 
 </manifest>

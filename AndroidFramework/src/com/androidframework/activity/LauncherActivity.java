@@ -3,7 +3,6 @@ package com.androidframework.activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 

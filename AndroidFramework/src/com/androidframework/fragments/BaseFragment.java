@@ -1,24 +1,33 @@
 package com.androidframework.fragments;
 
+import java.util.Hashtable;
+import java.util.Map.Entry;
+
+import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.androidframework.activity.CustomClass;
 import com.androidframework.interfaces.FragmentInterface;
 import com.androidframework.interfaces.OnLoadCompleteListener;
 
 /**
  * This is the base fragment which will be extended by all other fragments.
  * 
- * @author Praveen Kumar
+ * @author Praveen Kumar.
  * 
  */
 public abstract class BaseFragment extends Fragment implements
@@ -28,12 +37,102 @@ public abstract class BaseFragment extends Fragment implements
 	
 	private Uri uri;
 
+
 	public void initLoader(Uri uri, OnLoadCompleteListener notify) {
 		this.uri = uri;
 		this.mNotifyLoad = notify;
 		getLoaderManager().initLoader(0, null, this);
 	}
 	
+
+	// Handler object to send use runnable object and handle messages.
+	protected Handler handler = null;
+
+	// Parent view group of the fragment.
+	protected ViewGroup contentLayout = null;
+
+	// Runnable List contains list of API being called.
+	protected Hashtable<String, CustomClass> runnableList = null;
+
+	// Boolean indicates whether the runnable can be cancelled when the
+	// fragment goes to onDestroyView().
+	protected boolean doCancelRunnables = false;
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+
+	/**
+	 * Initialize the necessary objects here.
+	 */
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		handler = new Handler();
+		runnableList = new Hashtable<String, CustomClass>();
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		// Cancel list of API call runnable from the runnable list.
+		if(doCancelRunnables && runnableList!=null){
+			for (Entry<String, CustomClass> entry : runnableList.entrySet()) {
+				CustomClass customClassObClass = entry.getValue();
+				customClassObClass.printValue();
+			}
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+	}
+
+	@Override
+	public void onDetach() {
+		// TODO Auto-generated method stub
+		super.onDetach();
+	}
+
+	public Handler getHandler() {
+		return handler;
+	}
+
 	/**
 	 * Start a new Fragment.
 	 * 

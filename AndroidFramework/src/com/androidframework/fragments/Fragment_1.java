@@ -1,5 +1,6 @@
 package com.androidframework.fragments;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 
 import com.androidframework.R;
 import com.androidframework.activity.SubActivity1;
+import com.androidframework.constants.AnimationContants;
 
 public class Fragment_1 extends BaseFragment implements OnClickListener {
 	LinearLayout contentLayout = null;
@@ -26,19 +28,30 @@ public class Fragment_1 extends BaseFragment implements OnClickListener {
 				R.layout.layout_fragment_1, container, false);
 		doInitializeViews();
 		setListeners();
-		if(!getActivity().getActionBar().isShowing()){
+
+		if (!getActivity().getActionBar().isShowing()) {
 			getActivity().getActionBar().show();
 		}
 		return contentLayout;
 	}
+	
+	
 
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		ActionBar actionBar = getActivity().getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(false);
+	}
 
 	@Override
 	public void doInitializeViews() {
 		// TODO Auto-generated method stub
 		nextFragment = (Button) contentLayout.findViewById(R.id.nextFragment);
 		nextActivity = (Button) contentLayout.findViewById(R.id.nextActivity);
-		toggleActionBar = (Button) contentLayout.findViewById(R.id.toggleActionBar);
+		toggleActionBar = (Button) contentLayout
+				.findViewById(R.id.toggleActionBar);
 	}
 
 	@Override
@@ -51,19 +64,16 @@ public class Fragment_1 extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void setAdapters() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void setValues() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void setFonts() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -104,32 +114,39 @@ public class Fragment_1 extends BaseFragment implements OnClickListener {
 	}
 
 	private void setActivity() {
-		// TODO Auto-generated method stub
 		startActivity(new Intent(getActivity(), SubActivity1.class));
-		getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.fade_out_slow);
+		getActivity().overridePendingTransition(R.anim.slide_in_right,
+				R.anim.fade_out_slow);
 	}
 
 	private void toggleActionBar() {
-		// TODO Auto-generated method stub
 		boolean isVisible = getActivity().getActionBar().isShowing();
-		if(isVisible){
+		if (isVisible) {
 			getActivity().getActionBar().hide();
-		}else{
+		} else {
 			getActivity().getActionBar().show();
 		}
 	}
 
 	private void setFragment() {
-		int anim[]  = {R.anim.slide_in_right,R.anim.slide_out_left,R.anim.slide_in_left,R.anim.slide_out_right};
-		setFragment(new Fragment_2(),true,true,R.id.launcher_container1,null, anim,-1);
+		/*int anim[] = { R.anim.slide_in_right, R.anim.slide_out_left,
+				R.anim.slide_in_left, R.anim.slide_out_right };*/
+		int anim[] = { AnimationContants.SLIDE_IN_RIGHT,  AnimationContants.SLIDE_OUT_LEFT,
+				 AnimationContants.SLIDE_IN_LEFT,  AnimationContants.SLIDE_OUT_RIGHT};
+		setFragment(new Fragment_2(), true, true, R.id.launcher_container1,
+				"Fragment2", anim, -1);
 	}
-	
-	
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		doDisableView();
+	}
+	
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
 	}
 
 }

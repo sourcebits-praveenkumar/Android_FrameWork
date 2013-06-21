@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.androidframework.R;
 import com.androidframework.adapters.DisplayImageCursorAdapter;
+import com.androidframework.constants.AnimationContants;
 import com.androidframework.database.DatabaseHelper;
 import com.androidframework.interfaces.OnLoadCompleteListener;
 
@@ -29,6 +30,7 @@ public class Fragment_2 extends BaseFragment
 		implements
 			OnClickListener,
 			OnScrollListener {
+
 
 
 	LinearLayout contentLayout = null;
@@ -55,7 +57,7 @@ public class Fragment_2 extends BaseFragment
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		//getActivity().getActionBar().hide();
+		// getActivity().getActionBar().hide();
 		doInitializeViews();
 		setListeners();
 		setAdapters();
@@ -92,6 +94,7 @@ public class Fragment_2 extends BaseFragment
 		// adapter.setFooterView(footerView);
 		imageList.removeFooterView(footerView);
 		
+		
 
 	}
 
@@ -118,19 +121,23 @@ public class Fragment_2 extends BaseFragment
 
 	@Override
 	public void setValues() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void setFonts() {
-		// TODO Auto-generated method stub
-
+			getHandler().post(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 	}
 
 	@Override
 	public void doDisableView() {
-		// TODO Auto-generated method stub
 		if (back != null) {
 			back.setOnClickListener(null);
 			back = null;
@@ -141,26 +148,27 @@ public class Fragment_2 extends BaseFragment
 	public void onClick(View v) {
 		if (v != null) {
 			switch (v.getId()) {
-				case R.id.back :
-					moveToPreviousFragment();
-					break;
+			case R.id.back:
+				int anim[] = { AnimationContants.SLIDE_IN_RIGHT,  AnimationContants.SLIDE_OUT_LEFT,
+						 AnimationContants.SLIDE_IN_LEFT,  AnimationContants.SLIDE_OUT_RIGHT};
+				setFragment(new Fragment_3(), true, true, R.id.launcher_container1,
+						"Fragment3", anim, -1);
+				break;
 
-				default :
-					break;
+			default:
+				break;
 			}
 		}
 	}
 
-	private void moveToPreviousFragment() {
-		getActivity().getSupportFragmentManager().popBackStack();
-	}
+	
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		doDisableView();
 	}
-	
+
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		if (currentVisibleItemCount > 0 && scrollState == SCROLL_STATE_IDLE) {
@@ -221,7 +229,6 @@ public class Fragment_2 extends BaseFragment
 					Toast.LENGTH_SHORT).show();
 		}
 	}
-
 
 	private String[] urls = {
 			"http://t2.gstatic.com/images?q=tbn:ANd9GcQ4Fd4RGHi6hH5TxHN5XwxcEkr4Iw7lRPjcVjSEejiInDetGrgD",
@@ -284,6 +291,6 @@ public class Fragment_2 extends BaseFragment
 			"http://yunii.com/full/180600-desktop-gallery-nature-yellow-daisies-laptop.jpg",
 			"http://www.hdwallpapers1080.com/wp-content/uploads/2012/04/Nature-HD-wallpaper.jpg",
 			"http://www.walldesktops.com/wp-content/uploads/2013/05/Abstract-hd-wallpapers-1080p-96.jpg",
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1CjtSugiGnDq550SjgQ5tlJokFijcC_jBMLhChRB7siRMy4MH"};
+			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1CjtSugiGnDq550SjgQ5tlJokFijcC_jBMLhChRB7siRMy4MH" };
 
 }

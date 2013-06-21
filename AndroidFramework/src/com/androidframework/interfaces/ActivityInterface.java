@@ -2,7 +2,7 @@ package com.androidframework.interfaces;
 
 public interface ActivityInterface {
 	
-	void doInitializeViews(); // initialize the view of the fragment.
+/*	void doInitializeViews(); // initialize the view of the fragment.
 
 	void setListeners();// Set Listeners for the views of the fragment.
 
@@ -14,4 +14,4 @@ public interface ActivityInterface {
 
 	void doDisableView();// Disable or clear the views of the fragment. Opposite
 							// of doInitializeViews().
-}
+*/}

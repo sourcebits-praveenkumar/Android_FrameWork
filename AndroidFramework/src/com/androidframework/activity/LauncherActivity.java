@@ -25,7 +25,7 @@ public class LauncherActivity extends BaseActivity implements OnClickListener {
 		setFragment();
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-
+		
 	}
 
 	@Override
@@ -37,6 +37,8 @@ public class LauncherActivity extends BaseActivity implements OnClickListener {
 		searchView.setOnClickListener(this);
 		return true;
 	}
+	
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -58,11 +60,12 @@ public class LauncherActivity extends BaseActivity implements OnClickListener {
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
 		Fragment_1 fragment1 = new Fragment_1();
-		fragmentTransaction.add(R.id.launcher_container1, fragment1);
+		fragmentTransaction.add(R.id.launcher_container1, fragment1,"Fragment1");
+		//fragmentTransaction.addToBackStack(null);
 		fragmentTransaction.commitAllowingStateLoss();
 	}
 
-	private void moveToPreviousFragment() {
+	/*private void moveToPreviousFragment() {
 		Log.e("888", "COUNT---->>>"
 				+ LauncherActivity.this.getSupportFragmentManager()
 						.getBackStackEntryCount());
@@ -72,38 +75,15 @@ public class LauncherActivity extends BaseActivity implements OnClickListener {
 		} else {
 			this.finish();
 		}
-	}
-
-	@Override
-	public void doInitializeViews() {
-	}
-
-	@Override
-	public void setListeners() {
-	}
-
-	@Override
-	public void setAdapters() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setValues() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setFonts() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void doDisableView() {
-		// TODO Auto-generated method stub
-
+	}*/
+	
+	private void moveToPreviousFragment() {
+		Log.e("888", "COUNT---->>>"+this.getBackStackCount());
+		if (this.getBackStackCount()!=0) {
+			getSupportFragmentManager().popBackStack();
+		} else {
+			this.finish();
+		}
 	}
 
 	@Override

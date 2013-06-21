@@ -3,14 +3,9 @@ package com.androidframework.fragments;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.AsyncTask;
-
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -27,12 +22,12 @@ import android.widget.Toast;
 import com.androidframework.R;
 import com.androidframework.adapters.DisplayImageCursorAdapter;
 import com.androidframework.database.DatabaseHelper;
+import com.androidframework.interfaces.OnLoadCompleteListener;
 
 
 public class Fragment_2 extends BaseFragment
 		implements
 			OnClickListener,
-			LoaderCallbacks<Cursor>,
 			OnScrollListener {
 
 
@@ -64,8 +59,20 @@ public class Fragment_2 extends BaseFragment
 		doInitializeViews();
 		setListeners();
 		setAdapters();
+		
+		initLoader(DatabaseHelper.CONTENT_URI, new OnLoadCompleteListener() {
+			
+			@Override
+			public void loadCompleted(Cursor cursor) {
+				if(mAdapter != null) {
+					mAdapter.swapCursor(cursor);
+				}
+				if(footerView != null) {
+					imageList.removeFooterView(footerView);
+				}
+			}
+		});
 
-		getLoaderManager().initLoader(0, null, this);
 		if (getActivity() != null) {
 			footerView = new RelativeLayout(getActivity());
 		}
@@ -173,31 +180,6 @@ public class Fragment_2 extends BaseFragment
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
 		currentVisibleItemCount = visibleItemCount;
-
-	}
-
-	@Override
-	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		CursorLoader cl = new CursorLoader(getActivity(),
-				DatabaseHelper.CONTENT_URI, null, null, null, null);
-
-		cl.setUpdateThrottle(20000); // update at most every 20 seconds.
-		return cl;
-	}
-
-	@Override
-	public void onLoadFinished(Loader<Cursor> arg0, Cursor data) {
-		// Log.d("Inserted" , "load finished " + data.getCount());
-		mAdapter.swapCursor(data);
-		if (footerView != null) {
-			imageList.removeFooterView(footerView);
-		}
-
-	}
-
-	@Override
-	public void onLoaderReset(Loader<Cursor> arg0) {
-		mAdapter.swapCursor(null);
 
 	}
 
